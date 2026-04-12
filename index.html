@@ -7288,12 +7288,22 @@
             });
         });
 
+        // AI划词功能开关状态（默认开启）
+        let aiTextSelectionEnabled = true;
+
         // 绑定开关事件
         document.getElementById('textSelectionSwitch')?.addEventListener('change', (e) => {
             e.stopPropagation();
-            const enabled = e.target.checked;
-            showToast(`AI划词功能${enabled ? '已开启' : '已关闭'}`, 'success');
-            // TODO: 实现AI划词功能的开启/关闭逻辑
+            aiTextSelectionEnabled = e.target.checked;
+            showToast(`AI划词功能${aiTextSelectionEnabled ? '已开启' : '已关闭'}`, 'success');
+            
+            // 如果关闭划词功能，隐藏所有当前显示的工具栏
+            if (!aiTextSelectionEnabled) {
+                document.querySelectorAll('.ai-term-toolbar.active').forEach(toolbar => {
+                    toolbar.classList.remove('active');
+                    toolbar.style.visibility = '';
+                });
+            }
         });
 
         document.getElementById('floatBallSwitch')?.addEventListener('change', (e) => {
@@ -10211,6 +10221,9 @@ ${attachmentsHtml}
 
         // 动态定位工具栏
         function positionToolbar(wrapper) {
+            // 如果AI划词功能已关闭，不显示工具栏
+            if (!aiTextSelectionEnabled) return;
+            
             const toolbar = wrapper.querySelector('.ai-term-toolbar');
             const term = wrapper.querySelector('.ai-term');
             if (!toolbar || !term) return;
@@ -10259,6 +10272,9 @@ ${attachmentsHtml}
             const toolbar = wrapper.querySelector('.ai-term-toolbar');
             
             const showToolbar = () => {
+                // 如果AI划词功能已关闭，不显示工具栏
+                if (!aiTextSelectionEnabled) return;
+                
                 if (hideTimeout) {
                     clearTimeout(hideTimeout);
                     hideTimeout = null;
@@ -10312,6 +10328,9 @@ ${attachmentsHtml}
         document.addEventListener('click', function(e) {
             const btn = e.target.closest('.ai-toolbar-btn');
             if (!btn) return;
+            
+            // 如果AI划词功能已关闭，不响应工具栏按钮点击
+            if (!aiTextSelectionEnabled) return;
             
             const action = btn.getAttribute('data-action');
             const term = btn.getAttribute('data-term');
