@@ -2546,7 +2546,7 @@
         .welcome-avatar {
             width: 64px;
             height: 64px;
-            background: linear-gradient(135deg, var(--primary-orange) 0%, #ff8c5a 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #ffa95c 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -2560,6 +2560,29 @@
             fill: white;
         }
 
+        /* 欢迎页AI机器人图标 */
+        .ai-robot-welcome {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #ffa95c 100%) !important;
+        }
+
+        .ai-robot-face-welcome {
+            width: 44px;
+            height: 34px;
+            background: #1a1a2e;
+            border-radius: 17px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .ai-robot-eye-welcome {
+            width: 10px;
+            height: 14px;
+            background: white;
+            border-radius: 5px;
+        }
+
         .welcome-title {
             font-size: 20px;
             font-weight: 600;
@@ -2569,8 +2592,8 @@
         .welcome-desc {
             font-size: 14px;
             color: var(--text-secondary);
-            line-height: 1.6;
-            max-width: 400px;
+            line-height: 1.8;
+            max-width: 420px;
             margin: 0 auto 30px;
         }
 
@@ -5861,16 +5884,17 @@
                     <!-- 欢迎首页 -->
                     <div class="chat-home" id="chatHome">
                         <div class="welcome-section">
-                            <div class="welcome-avatar">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
-                                    <circle cx="12" cy="9" r="2"/>
-                                    <path d="M12 16c-2.21 0-4-1.79-4-4h2c0 1.1.9 2 2 2s2-.9 2-2h2c0 2.21-1.79 4-4 4z"/>
-                                </svg>
+                            <div class="welcome-avatar ai-robot-welcome">
+                                <div class="ai-robot-face-welcome">
+                                    <div class="ai-robot-eye-welcome left"></div>
+                                    <div class="ai-robot-eye-welcome right"></div>
+                                </div>
                             </div>
-                            <div class="welcome-title">嗨～我是天纵平台AI智能助手</div>
+                            <div class="welcome-title">嗨～我是天纵AI智能助手</div>
                             <div class="welcome-desc">
-                                我可以帮你查询导出数据、进行智能推理分析、解答后台使用问题，还能为你推送重要通知。有什么可以帮你的吗？
+                                📊 我可以帮你查询导出数据、进行智能推理分析<br>
+                                💡 解答后台使用问题，还能为你推送重要通知<br>
+                                🤔 有什么可以帮你的吗？
                             </div>
                         </div>
 
