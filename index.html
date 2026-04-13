@@ -1699,6 +1699,57 @@
             70% { transform: scale(1.05); }
         }
 
+        /* 呼吸弹跳动画 - 消息提醒时使用 */
+        .ai-float-btn.pulse-bounce {
+            animation: pulse-bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-bounce {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 8px 32px rgba(255, 107, 53, 0.4);
+            }
+            25% { 
+                transform: scale(1.08);
+                box-shadow: 0 12px 40px rgba(255, 107, 53, 0.6);
+            }
+            50% { 
+                transform: scale(1);
+                box-shadow: 0 8px 32px rgba(255, 107, 53, 0.4);
+            }
+            75% { 
+                transform: scale(1.05);
+                box-shadow: 0 10px 36px rgba(255, 107, 53, 0.5);
+            }
+        }
+
+        /* 消息提醒红点 */
+        .ai-float-btn.has-notification::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 12px;
+            height: 12px;
+            background: #ff4d4f;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            animation: notification-pulse 1.5s ease-in-out infinite;
+            z-index: 10;
+        }
+
+        @keyframes notification-pulse {
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% { 
+                transform: scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
         .ai-float-btn .ai-icon {
             width: 32px;
             height: 32px;
@@ -1828,55 +1879,14 @@
         }
 
         .skill-bubble-text {
-            font-size: 10px;
+            font-size: 13px;
             color: white;
-            font-weight: 600;
+            font-weight: 700;
             white-space: nowrap;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.4);
-            letter-spacing: 0.3px;
-        }
-
-        /* 气泡连接线 - 从主图标中心(0,0)指向各气泡中心 */
-        .skill-bubble-line {
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, rgba(255, 107, 53, 0.5), rgba(255, 107, 53, 0.1));
-            transform-origin: right center;
-            right: 0;
-            bottom: 0;
-            opacity: 0;
-            transition: all 0.3s ease;
-            border-radius: 1px;
-        }
-
-        .skill-bubbles-container.active .skill-bubble-line {
-            opacity: 1;
-        }
-
-        /* 连接线从中心指向各气泡 - 角度: -45°, -15°, 15°, 45° */
-        .skill-bubbles-container.active .skill-bubble-line:nth-child(1) {
-            width: 155px;
-            transform: rotate(-45deg);
-            transition-delay: 0.05s;
-        }
-
-        .skill-bubbles-container.active .skill-bubble-line:nth-child(2) {
-            width: 175px;
-            transform: rotate(-15deg);
-            transition-delay: 0.1s;
-        }
-
-        .skill-bubbles-container.active .skill-bubble-line:nth-child(3) {
-            width: 175px;
-            transform: rotate(15deg);
-            transition-delay: 0.15s;
-        }
-
-        .skill-bubbles-container.active .skill-bubble-line:nth-child(4) {
-            width: 155px;
-            transform: rotate(45deg);
-            transition-delay: 0.2s;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.8);
+            letter-spacing: 0.5px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         @keyframes ripple-effect {
@@ -5673,12 +5683,6 @@
         
         <!-- 技能气泡容器 -->
         <div class="skill-bubbles-container" id="skillBubblesContainer">
-            <!-- 连接线 -->
-            <div class="skill-bubble-line"></div>
-            <div class="skill-bubble-line"></div>
-            <div class="skill-bubble-line"></div>
-            <div class="skill-bubble-line"></div>
-            
             <!-- 技能气泡 -->
             <div class="skill-bubble" data-skill="query" title="智能提数">
                 <svg class="skill-bubble-icon" viewBox="0 0 24 24">
@@ -7440,6 +7444,9 @@
             elements.assistantWindow.classList.add('active');
             // 隐藏悬浮按钮
             elements.floatContainer.classList.add('hidden');
+            
+            // 清除通知状态
+            clearNotification();
             
             setTimeout(() => {
                 elements.assistantWindow.classList.remove('expanding');
@@ -9390,9 +9397,18 @@ ${attachmentsHtml}
                 removeThinking(thinkingId);
                 const response = getAIResponse(messageText);
                 addMessage(response, false);
+                
+                // 如果窗口未打开，触发呼吸弹跳动画提醒
+                if (!elements.assistantWindow.classList.contains('active')) {
+                    elements.floatBtn.classList.add('pulse-bounce', 'has-notification');
+                }
             }, delay);
         }
-
+        
+        // 清除通知状态（当打开窗口时调用）
+        function clearNotification() {
+            elements.floatBtn.classList.remove('pulse-bounce', 'has-notification');
+        }
 
 
         // ==================== 文件上传 ====================
@@ -10573,3 +10589,4 @@ ${interpretation.normalRange}`;
     </script>
 </body>
 </html>
+
