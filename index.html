@@ -995,12 +995,13 @@
         }
 
         .ai-guide-header {
-            background: linear-gradient(135deg, #722ed1 0%, #b37feb 100%);
-            color: #fff;
+            background: #fff;
+            color: var(--text-primary);
             padding: 20px 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .ai-guide-title {
@@ -1014,7 +1015,7 @@
         .ai-guide-avatar {
             width: 40px;
             height: 40px;
-            background: rgba(255, 255, 255, 0.2);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #ffa95c 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -1028,13 +1029,62 @@
             50% { transform: translateY(-3px); }
         }
 
+        /* AI机器人小头像（用于对话区域） */
+        .ai-robot-avatar {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #ffa95c 100%) !important;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .ai-robot-face-small {
+            width: 26px;
+            height: 20px;
+            background: #1a1a2e;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .ai-robot-eye-small {
+            width: 6px;
+            height: 9px;
+            background: white;
+            border-radius: 3px;
+        }
+
+        /* AI机器人超小头像（用于header） */
+        .ai-robot-face-tiny {
+            width: 22px;
+            height: 16px;
+            background: #1a1a2e;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+        }
+
+        .ai-robot-eye-tiny {
+            width: 5px;
+            height: 7px;
+            background: white;
+            border-radius: 2.5px;
+        }
+
         .ai-guide-close {
             width: 32px;
             height: 32px;
             border: none;
-            background: rgba(255, 255, 255, 0.2);
+            background: var(--bg-gray);
             border-radius: 50%;
-            color: #fff;
+            color: var(--text-secondary);
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -1043,7 +1093,8 @@
         }
 
         .ai-guide-close:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: var(--bg-hover);
+            color: var(--text-primary);
         }
 
         .ai-guide-body {
@@ -1172,24 +1223,24 @@
 
         .ai-guide-btn-secondary {
             padding: 8px 20px;
-            border: 1px solid #d9d9d9;
+            border: 1px solid var(--border-color);
             background: #fff;
             border-radius: 4px;
             font-size: 14px;
             cursor: pointer;
-            color: rgba(0, 0, 0, 0.65);
+            color: var(--text-secondary);
             transition: all 0.2s;
         }
 
         .ai-guide-btn-secondary:hover {
-            border-color: #722ed1;
-            color: #722ed1;
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
         }
 
         .ai-guide-btn-primary {
             padding: 8px 20px;
             border: none;
-            background: linear-gradient(135deg, #722ed1 0%, #b37feb 100%);
+            background: var(--primary-blue);
             border-radius: 4px;
             font-size: 14px;
             cursor: pointer;
@@ -1212,9 +1263,10 @@
         }
 
         .ai-guide-chat-header {
-            background: linear-gradient(135deg, #722ed1 0%, #b37feb 100%);
-            color: #fff;
+            background: #fff;
+            color: var(--text-primary);
             padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             gap: 8px;
@@ -1320,18 +1372,19 @@
             display: inline-block;
             padding: 6px 12px;
             background: #fff;
-            border: 1px solid #d3adf7;
+            border: 1px solid var(--border-color);
             border-radius: 16px;
             font-size: 13px;
-            color: #722ed1;
+            color: var(--primary-blue);
             cursor: pointer;
             transition: all 0.2s;
         }
 
         .ai-guide-suggestion-tag:hover {
-            background: #722ed1;
+            background: var(--primary-blue);
             color: #fff;
             transform: translateY(-1px);
+            border-color: var(--primary-blue);
         }
 
         .ai-guide-chat-input-area {
@@ -1351,8 +1404,8 @@
         }
 
         .ai-guide-chat-input-wrapper:focus-within {
-            border-color: #722ed1;
-            box-shadow: 0 0 0 3px rgba(114, 46, 209, 0.1);
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.1);
         }
 
         .ai-guide-chat-input {
@@ -1373,7 +1426,7 @@
             width: 36px;
             height: 36px;
             border: none;
-            background: linear-gradient(135deg, #722ed1 0%, #b37feb 100%);
+            background: var(--primary-blue);
             border-radius: 50%;
             color: #fff;
             cursor: pointer;
@@ -5583,7 +5636,12 @@
         <div class="ai-guide-content">
             <div class="ai-guide-header">
                 <div class="ai-guide-title">
-                    <div class="ai-guide-avatar">🤖</div>
+                    <div class="ai-guide-avatar">
+                        <div class="ai-robot-face-tiny">
+                            <div class="ai-robot-eye-tiny left"></div>
+                            <div class="ai-robot-eye-tiny right"></div>
+                        </div>
+                    </div>
                     <span>AI智能解读助手</span>
                 </div>
                 <button class="ai-guide-close" id="aiGuideClose">
@@ -5673,12 +5731,16 @@
                     <div class="ai-guide-chat-header">
                         <span class="ai-guide-chat-icon">💬</span>
                         <span>智能问答</span>
-                        <span class="ai-guide-chat-status">● 在线</span>
                     </div>
                     <div class="ai-guide-chat-messages" id="aiGuideChatMessages">
                         <!-- 欢迎消息 -->
                         <div class="ai-guide-message ai">
-                            <div class="ai-guide-message-avatar">🤖</div>
+                            <div class="ai-guide-message-avatar ai-robot-avatar">
+                                <div class="ai-robot-face-small">
+                                    <div class="ai-robot-eye-small left"></div>
+                                    <div class="ai-robot-eye-small right"></div>
+                                </div>
+                            </div>
                             <div class="ai-guide-message-content">
                                 <div class="ai-guide-message-text">您好！我是AI智能解读助手，专门帮助您理解区服数据报表。您可以问我：</div>
                                 <div class="ai-guide-message-suggestions">
