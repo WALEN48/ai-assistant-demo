@@ -1815,7 +1815,7 @@
         .skill-bubbles-container {
             position: absolute;
             top: 50%;
-            right: 36px;
+            right: 30px;
             width: 0;
             height: 0;
             pointer-events: none;
@@ -1872,25 +1872,25 @@
         }
 
         /* 扇形展开 - 以主图标中心为圆心，向左侧半圆展开 */
-        /* 角度: 左上-45°, 左中上-15°, 左中下15°, 左下45° */
-        /* 间距缩小约30% */
+        /* 角度增加: 左上-55°, 左中上-20°, 左中下20°, 左下55° */
+        /* 间距进一步缩小 */
         .skill-bubbles-container.active .skill-bubble[data-skill="query"] {
-            transform: translate(-95px, -95px);
+            transform: translate(-75px, -110px);
             transition-delay: 0.05s;
         }
 
         .skill-bubbles-container.active .skill-bubble[data-skill="analyze"] {
-            transform: translate(-120px, -32px);
+            transform: translate(-100px, -38px);
             transition-delay: 0.1s;
         }
 
         .skill-bubbles-container.active .skill-bubble[data-skill="help"] {
-            transform: translate(-120px, 32px);
+            transform: translate(-100px, 38px);
             transition-delay: 0.15s;
         }
 
         .skill-bubbles-container.active .skill-bubble[data-skill="notify"] {
-            transform: translate(-95px, 95px);
+            transform: translate(-75px, 110px);
             transition-delay: 0.2s;
         }
 
